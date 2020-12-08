@@ -2,7 +2,7 @@
 //G. Poppe
 //Shane Cortez
 //Michael VanCleave-Lopez
-
+//Angel Varela
 //Sergio Molina
 
 //Richmond Laureta
@@ -22,8 +22,9 @@ void shanesFileWriter(int choice);
 
 ///////////Shanes room methods end/////////
 
-void extraCredit(void);
-void ignoreExtra(void);
+void extraCredit(char arr[]);
+void typeUpperCase(char arr[]);
+void kickedFromRoom(void);
 
 int choice1(int number);
 int choice2(char *ptr);
@@ -247,25 +248,29 @@ int main(void)
 			{
 					while(choice != 99)
 					{
+							printf("%s", "Press ctrl + c if you want to leave!\n");
 							printf("%s", "You open the door and find ........\n");
-							printf("%s", "You see extra credit for CSC 251-01\n Do you chase it?\n");
-							printf("%s%s%s", "1) To chase it\n","2) Ignore the tempations of passing the class!\n","99) If you don't want to play anymore\n");
+							spawn: printf("%s", "You see extra credit for CSC 251-01, enought to pass the class!\nDo you chase it?\n");
+							printf("%s%s%s", "\t1)Go for it!\n","\t2)Ignore the tempations of passing the class!\n","\t99)If you don't want to play anymore\n");
 							scanf("%d",&choice);
-							
+
 							switch(choice)
 							{
 								case 1:
-									extraCredit();
+									extraCredit(name);
 									break;
 								case 2:
-									ignoreExtra();
+									//typeUpperCase(name); Can use later
+									kickedFromRoom();
 									break;
+								
 								case 99:
 									break;
+								
 								default:
 									printf("%s", "Please follow the directions!\nYou're going to back to spawn!\n");
-									break;			
-							
+									goto spawn;
+
 							}
 					break;
 					}
@@ -4686,35 +4691,181 @@ break;
 	}
 }
 
-void extraCredit(void)
+void extraCredit(char arr[])
 {
-	printf("%s", "You have gained extra credit!\nIf you beat me in a duel!\n");
-
-	printf("%s", "DUEL MECHANICS WILL BE IMPLEMENTED IN THE NEXT UPDATE\n\n");
-}
-
-
-void ignoreExtra(void)
-{
-	int counter = 0;
-
-	printf("%s", "Take the extra credit, I'm not gonna ask you again!\n");
-
+	int useDice;
+	printf("$$^&$#*telehack.exe has hacked into the room!\n\n");
+	
+	printf("Sorry %s, but I need that extra credit!\n", arr);
+	repeat:  
+	printf("What do you do?\n\t1)Fight it\n\t2)Surrender!\n");
 	int choice;
-	printf("%s", "Please type 1 for extra credit\n or you will be kicked out of room THREE!\n");
-	scanf("%d", &choice);
+	scanf("%d",&choice);
 	
 	switch(choice)
 	{
 		case 1:
-			extraCredit();
+			printf("telehack.exe: Alright, I'll keep this duel fair...\nWe will both play rock paper scissors!\n\n");
+			printf("telehack.exe has made his decision!\n\nWhat do you pick?\n");
+			int gameChoice;
+			printf("\t1)Rock\n\t2)Paper\n\t3)Scissors\n");
+			
+			cheatOne: //back to me!
+			scanf(" %d", &gameChoice);
+			switch(gameChoice)
+			{
+				case 1:
+				case 2:
+					printf("No\n");
+					goto cheatOne;
+				case 3:
+					printf("Look like you lose, I picked the winner! :)\nAny last words before I kick you?\n");
+					int dieChoice;
+					
+					diceR:
+					printf("\t1)Roll magic die\n\t2)Rage quit!\n");
+					scanf("%d", &dieChoice);
+					
+					switch(dieChoice)
+					{
+						case 1:
+							useDice =  1 + rand()%6; // 0 1 2 3 4 5 = 6 blocks NOW ADD ONE 
+							printf("You rolled a %d!\n\n", useDice);
+							printf("Trying to win are we?\n\tWell I rolled a %d, double your roll!\n\n", useDice * 2);
+							typeUpperCase(arr); 
+							break; //Will do things
+						
+						case 2:
+							kickedFromRoom();
+							break;
+						default:
+							printf("Please type 1...don't waste your time with 2!");
+							goto diceR;
+						
+					}
+					
+					
+					break;//will send me out of the room!
+				
+				default:
+					printf("That wasn't one of the options!\n");
+					goto cheatOne;
+				
+			}
+			
 			break;
-
-		defualt:
-			printf("%s", "You have been kicked!...LEAVE THIS ROOM AT ONCE!\n");
-			break;
-
+			
+		case 2:
+			printf("You can't leave...\n\n");
+			goto repeat;
+		
+		default:
+			printf("Type 1 or 2!\n\n");
+			goto repeat;
+		
 	}
+	
+}
+
+
+void typeUpperCase(char arr[]) //use me for later or legacy ):
+{
+	printf("%s: telehack.exe, you're a real Cheater\n", arr);
+	printf("telehack.exe: A what?\n%s: A [_]heater!\n", arr);
+	
+	printf("Type 'C'\n You can also type it in lowercase to test it!\n");
+	int x = 0;
+	int c;
+	
+	while(x = 0)
+	{
+		c = getchar();
+		
+		if(islower(c))
+		{
+			printf("Type 'C' in uppercase\n");
+			continue;
+		}
+		else if(isupper(c))
+		{
+			break;
+		}
+		else
+		{
+			printf("...");
+			continue;
+		}
+	}
+		
+		printf("telehack.exe: Ok I cheated, so what?!....\n\nAlright fine, we will late fate decide!\n");
+		printf("I will roll a random number!\nNo tricks this time!\nJust wanted to give you some pointers!\n");
+		
+		printf("\nYOU WILL NOT RESTART IF YOU LOSE!!!\n\n");
+		
+		printf("*rolls dice*\n");
+		
+		while(1 > 0)
+		{
+			int rollDice;
+			int cpuARRAY[1] = {0};
+			int playerARRAY[1] = {0};
+			int *CPUPointer;
+			int *playerPointer;
+			
+			CPUPointer = cpuARRAY;
+			playerPointer = playerARRAY;
+			
+			
+			*CPUPointer = 1 + rand()%6;
+			printf("telehack.exe: Wow, I rolled a %d, good luck %s:)\n\n", *CPUPointer, arr);
+
+			
+			printf("What do you do?\n");
+			
+			rng: 
+			printf("\t1)Roll the dice\n\t2)Check inventory\n\t3)Skip, in case you don't want to deal with RNG or they rolled a high number!):\n");
+			scanf("%d", &rollDice);
+			
+			switch(rollDice)
+			{
+				case 1:
+					
+					*playerPointer = 1 + rand()%6;
+					roll:
+					printf("You rolled a %d!", *playerPointer);
+					
+					if(*CPUPointer < *playerPointer )
+					{
+						printf("You won!\n You recieved five extra credit points\n\n*You walk out of room three!*\n\n");
+						break;
+						
+					}
+					else
+					{
+						printf("You lose %s\n\n", arr);
+						printf("*time warp noise*\n\n");
+						goto rng;
+					}
+				
+				case 2:
+					printf("Add later\n\n");
+					goto rng;
+					
+				case 3:
+					*playerPointer = 99;
+					goto roll;
+				
+				default:
+					printf("%s, please follwo the directions!\n", arr);
+					continue;
+			}
+		break;
+	}
+}
+
+void kickedFromRoom(void)
+{
+		printf("KICKED!\n\n");
 }
 
 
